@@ -46,16 +46,16 @@ if ($('#pager-wrapper').length) {
 }
 
 $('#et-here-btn').click(function() {
-    txt('here');
+    txt('here | page ' + page);
 });
 $('#et-done-btn').click(function() {
-    txt('done');
+    txt('done | page ' + page);
 });
 $('#et-outhearts-btn').click(function() {
     txt('out of hearts | page ' + page);
 });
 $('#fav-all').click(function() {
-    favAll();
+    favStart();
 });
 $('#click-all').click(function() {
     clickAll();
@@ -105,57 +105,31 @@ function txt(t) {
     $('input#new-post-submit').simulateClick('click');
 };
 
-function favAll() {
+function favStart() {
     if (hearted > 300) {
         sessionStorage.favathone = 0;
         $('#et-status-list').attr('style', 'background:#F49D92').prepend('<li>The limit of 300 hearts is reached. Please, wait until next hour and press the button again.</li>');
     } else {
         if ($(".thread").length) {
-            favA();
+            favAll(".thread .favorited-button", ".thread .button-fave", ".favorited-button");
         } else if ($("#listing-wrapper").length || $(".treasury-view").length) {
-            favB();
+            favAll(".listings .listing-card .btn-fave.done", ".listings .listing-card .btn-fave", ".done");
         }
     }
 }
 
-function favA() {
+function favAll(a, b, c) {
     var one = setInterval(function() {
-        $(".thread .favorited-button").each(function() {
+        $(a).each(function() {
             $(this).simulateClick('click');
         });
-        if (0 == $(".thread .favorited-button").length) {
+        if (0 == $(a).length) {
             clearInterval(one);
             var two = setInterval(function() {
-                $(".thread .button-fave").not(".favorited-button").each(function() {
+                $(b).not(c).each(function() {
                     $(this).simulateClick('click');
                 });
-                if (!($(".thread .button-fave").not(".favorited-button").length)) {
-                    clearInterval(two);
-                    if ($("#pager-wrapper .next").length) {
-                        sessionStorage.favathone = 1;
-                        $('a.next').simulateClick('click');
-                    } else {
-                        sessionStorage.favathone = 0;
-                        $('#et-status-list').attr('style', 'background:#92F496').prepend('<li>Finished! Please, don\'t forget to check few pages, just in case if you were out of hearts.</li>');
-                    }
-                }
-            }, 1000)
-        }
-    }, 1000)
-}
-
-function favB() {
-    var one = setInterval(function() {
-        $(".listings .listing-card .btn-fave.done").each(function() {
-            $(this).simulateClick('click');
-        });
-        if (0 == $(".listings .listing-card .btn-fave.done").length) {
-            clearInterval(one);
-            var two = setInterval(function() {
-                $(".listings .listing-card .btn-fave").not(".done").each(function() {
-                    $(this).simulateClick('click');
-                });
-                if (!($(".listings .listing-card .btn-fave").not(".done").length)) {
+                if (!($(b).not(c).length)) {
                     clearInterval(two);
                     if ($("#pager-wrapper .next").length) {
                         sessionStorage.favathone = 1;
@@ -212,5 +186,5 @@ jQuery.fn.simulateClick = function() {
 init();
 
 if (sessionStorage.favathone == 1) {
-    favAll();
+    favStart();
 }
