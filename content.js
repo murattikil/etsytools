@@ -27,7 +27,7 @@ ad = [
     'Have a nice sales',
     'Simplicity is the ultimate sophistication. - Leonardo da Vinci',
     '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donate%40reatlat%2enet&lc=GB&item_name=Thanks%20for%20EtsyTools&item_number=EtsyTools&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHostedGuest" target="_blank">EtsyTools is not done for money, but feel free to show us how much you like it :)</a>',
-    'Please like <a href="https://www.facebook.com/TatianaZappaOfficialPage">page</a> my wife.',
+    'Please like <a href="https://www.facebook.com/TatianaZappaOfficialPage" target="_blank">page</a> my wife.',
     'Please like <a href="https://www.etsy.com/shop/TatianaZappaArt">store</a> my wife.',
     'Tell sellers about <a href="http://etsytools.reatlat.net/" target="_blank">EtsyTools</a>',
     'Please share "<a href="http://etsytools.reatlat.net/" target="_blank">EtsyTools</a>" to friends',
