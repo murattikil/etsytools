@@ -1,4 +1,4 @@
-var css = document.createElement('LINK'), userid, bar, buttons, counter, reply, note, ad;
+var css = document.createElement('LINK'), userid, bar, buttons, counter, reply, ad;
 css.rel = 'stylesheet';
 css.href = 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css';
 document.getElementsByTagName('HEAD')[0].appendChild(css);
@@ -22,14 +22,15 @@ reply = '<button id="et-here-btn">here</button>';
 reply += '<button id="et-done-btn">done</button>';
 reply += '<br><button id="et-outhearts-btn">out of hearts</button>';
 
-note = '\n\n❤❤❤❤❤❤❤❤❤❤❤❤';
-note += '\nI am using EtsyTools';
-note += '\nIt\'s quick. It\'s easy to use. It\'s free!';
-note += '\nhttp://etsytools.reatlat.net/';
-
 ad = [
+    'Have fun ;)',
+    'Have a nice sales',
     'Simplicity is the ultimate sophistication. - Leonardo da Vinci',
-    'Please share "<a href="http://etsytools.reatlat.net/" target="_blank">EtsyTools</a>"" for friends',
+    '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donate%40reatlat%2enet&lc=GB&item_name=Thanks%20for%20EtsyTools&item_number=EtsyTools&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHostedGuest" target="_blank">EtsyTools is not done for money, but feel free to show us how much you like it :)</a>',
+    'Please like <a href="https://www.facebook.com/TatianaZappaOfficialPage">page</a> my wife.',
+    'Please like <a href="https://www.etsy.com/shop/TatianaZappaArt">store</a> my wife.',
+    'Tell sellers about <a href="http://etsytools.reatlat.net/" target="_blank">EtsyTools</a>',
+    'Please share "<a href="http://etsytools.reatlat.net/" target="_blank">EtsyTools</a>" for friends',
     'Do you like "<a href="http://etsytools.reatlat.net/" target="_blank">EtsyTools</a>"? Please leave <a href="https://chrome.google.com/webstore/detail/etsytools/cmmikdmpeopfconfkmdnoffbplecnjae/reviews" target="_blank">review</a> =)'
 ];
 
@@ -101,7 +102,7 @@ function timer() {
 }
 
 function txt(t) {
-    $('p#reply-paragraph').children('textarea').text(t + note);
+    $('p#reply-paragraph').children('textarea').text(t);
     $('input#new-post-submit').simulateClick('click');
 };
 
