@@ -30,7 +30,7 @@ ad = [
     'Please like <a href="https://www.facebook.com/TatianaZappaOfficialPage">page</a> my wife.',
     'Please like <a href="https://www.etsy.com/shop/TatianaZappaArt">store</a> my wife.',
     'Tell sellers about <a href="http://etsytools.reatlat.net/" target="_blank">EtsyTools</a>',
-    'Please share "<a href="http://etsytools.reatlat.net/" target="_blank">EtsyTools</a>" for friends',
+    'Please share "<a href="http://etsytools.reatlat.net/" target="_blank">EtsyTools</a>" to friends',
     'Do you like "<a href="http://etsytools.reatlat.net/" target="_blank">EtsyTools</a>"? Please leave <a href="https://chrome.google.com/webstore/detail/etsytools/cmmikdmpeopfconfkmdnoffbplecnjae/reviews" target="_blank">review</a> =)'
 ];
 
