@@ -111,14 +111,14 @@ function favStart() {
         $('#et-status-list').attr('style', 'background:#F49D92').prepend('<li>The limit of 300 hearts is reached. Please, wait until next hour and press the button again.</li>');
     } else {
         if ($(".thread").length) {
-            favAll(".thread .favorited-button", ".thread .button-fave", ".favorited-button");
+            favAll(".thread .favorited-button", ".thread .button-fave", ".favorited-button", 1);
         } else if ($("#listing-wrapper").length || $(".treasury-view").length) {
-            favAll(".listings .listing-card .btn-fave.done", ".listings .listing-card .btn-fave", ".done");
+            favAll(".listings .listing-card .btn-fave.done", ".listings .listing-card .btn-fave", ".done", 0);
         }
     }
 }
 
-function favAll(a, b, c) {
+function favAll(a, b, c, d) {
     var one = setInterval(function() {
         $(a).each(function() {
             $(this).simulateClick('click');
@@ -132,7 +132,7 @@ function favAll(a, b, c) {
                 if (!($(b).not(c).length)) {
                     clearInterval(two);
                     if ($("#pager-wrapper .next").length) {
-                        sessionStorage.favathone = 1;
+                        sessionStorage.favathone = d;
                         $('a.next').simulateClick('click');
                     } else {
                         sessionStorage.favathone = 0;
