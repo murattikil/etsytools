@@ -1,4 +1,4 @@
-var css = document.createElement('LINK'), hearted, userid, bar, buttons, counter, reply, note, ad;
+var css = document.createElement('LINK'), userid, bar, buttons, counter, reply, note, ad;
 css.rel = 'stylesheet';
 css.href = 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css';
 document.getElementsByTagName('HEAD')[0].appendChild(css);
@@ -87,7 +87,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 function update_counters(data) {
-    window.hearted = parseInt(data.hearted);
+    localStorage.hearted = parseInt(data.hearted);
     $('#et-hearted').text(parseInt(data.hearted));
     $('#et-unhearted').text(parseInt(data.unhearted));
 }
@@ -106,7 +106,7 @@ function txt(t) {
 };
 
 function favStart() {
-    if (hearted > 300) {
+    if (localStorage.hearted > 300) {
         sessionStorage.favathone = 0;
         $('#et-status-list').attr('style', 'background:#F49D92').prepend('<li>The limit of 300 hearts is reached. Please, wait until next hour and press the button again.</li>');
     } else {
