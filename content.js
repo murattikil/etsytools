@@ -1,7 +1,13 @@
-var css = document.createElement('LINK'), userid, bar, buttons, counter, reply, ad;
+var css = document.createElement('LINK'),
+    userid, bar, buttons, counter, reply, ad;
 css.rel = 'stylesheet';
 css.href = 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css';
 document.getElementsByTagName('HEAD')[0].appendChild(css);
+
+var sound = {
+    'oops': chrome.extension.getURL('audio/oops.mp3'),
+    'pling': chrome.extension.getURL('audio/pling.mp3')
+}
 
 bar = '<div id="et-bar" class="etsytools-bar"><div id="et-bar-container">';
 bar += '<div id="et-counter"></div>';
@@ -40,7 +46,7 @@ $('#et-menu').append(buttons);
 $("div#right").children("div.panel.clear").children('a#reply-box-button').before(reply);
 $('#et-status-list').prepend('<li>' + ad[Math.floor(Math.random() * ad.length)] + '</li>')
 
-if ($('#pager-wrapper').length) {
+if ($('.pager').length) {
     var page = $('#pager-wrapper .current-page').text() || $('#pager-wrapper .active a').text();
     var pages = $('#pager-wrapper .page_num:last').text() || $('#pager-wrapper li:last a').text();
     $('#et-status-list').prepend('<li>page ' + page + ' of ' + pages + '</li>')
@@ -109,40 +115,84 @@ function txt(t) {
 function favStart() {
     if (localStorage.hearted > 300) {
         sessionStorage.favathone = 0;
+        playSound(sound.oops);
         $('#et-status-list').attr('style', 'background:#F49D92').prepend('<li>The limit of 300 hearts is reached. Please, wait until next hour and press the button again.</li>');
-    } else {
-        if ($(".thread").length) {
-            favAll(".thread .favorited-button", ".thread .button-fave", ".favorited-button", 1);
-        } else if ($("#listing-wrapper").length || $(".treasury-view").length) {
-            favAll(".listings .listing-card .btn-fave.done", ".listings .listing-card .btn-fave", ".done", 0);
-        }
+    } else if ($(".thread").length) {
+        favA();
+    } else if ($("#listing-wrapper").length || $(".treasury-view").length) {
+        favB();
     }
 }
 
-function favAll(a, b, c, d) {
-    var one = setInterval(function() {
-        $(a).each(function() {
-            $(this).simulateClick('click');
-        });
-        if (0 == $(a).length) {
-            clearInterval(one);
-            var two = setInterval(function() {
-                $(b).not(c).each(function() {
-                    $(this).simulateClick('click');
-                });
-                if (!($(b).not(c).length)) {
-                    clearInterval(two);
-                    if ($("#pager-wrapper .next").length) {
-                        sessionStorage.favathone = d;
+function favA() {
+    var x = [];
+    $('.thread .favorited-button:visible').each(function() {
+        if (0 > $.inArray($(this).attr('rel'), x)) {
+            x.push($(this).attr('rel'));
+            this.click();
+        }
+    });
+    var y = setInterval(function() {
+        if (0 == $('.thread .favorited-button:visible').length) {
+            clearInterval(y);
+            var x = [];
+            $('.thread .button-fave:visible').not('.favorited-button').each(function() {
+                if (0 > $.inArray($(this).attr('rel'), x)) {
+                    x.push($(this).attr('rel'));
+                    this.click();
+                }
+            });
+            var z = setInterval(function() {
+                if (0 == $('.thread .button-fave:visible').not('.favorited-button').length) {
+                    clearInterval(z);
+                    if ($('#pager-wrapper .next').length) {
+                        sessionStorage.favathone = 1;
                         $('a.next').simulateClick('click');
                     } else {
                         sessionStorage.favathone = 0;
+                        playSound(sound.pling);
                         $('#et-status-list').attr('style', 'background:#92F496').prepend('<li>Finished! Please, don\'t forget to check few pages, just in case if you were out of hearts.</li>');
                     }
                 }
-            }, 1000)
+
+            }, 100)
         }
-    }, 1000)
+    }, 100)
+}
+
+function favB() {
+    var x = [];
+    $('.listings .listing-card .btn-fave.done').each(function() {
+        if (0 > $.inArray($(this).parent().data('listing-id'), x)) {
+            x.push($(this).parent().data('listing-id'));
+            this.click();
+        }
+    });
+    var y = setInterval(function() {
+        if (0 == $('.listings .listing-card .btn-fave.done').length) {
+            clearInterval(y);
+            var x = [];
+            $('.listings .listing-card .btn-fave').not('.done').each(function() {
+                if (0 > $.inArray($(this).parent().data('listing-id'), x)) {
+                    x.push($(this).parent().data('listing-id'));
+                    this.click();
+                }
+            });
+            var z = setInterval(function() {
+                if (0 == $('.listings .listing-card .btn-fave').not('.done').length) {
+                    clearInterval(z);
+                    if ($('#pager-wrapper .next').length) {
+                        sessionStorage.favathone = 0;
+                        $('a.next').simulateClick('click');
+                    } else {
+                        sessionStorage.favathone = 0;
+                        playSound(sound.pling);
+                        $('#et-status-list').attr('style', 'background:#92F496').prepend('<li>Finished! Please, don\'t forget to check few pages, just in case if you were out of hearts.</li>');
+                    }
+                }
+            }, 100)
+        }
+    }, 100)
 }
 
 function clickAll() {
@@ -156,6 +206,7 @@ function clickAll() {
     if (next.length) {
         openLink(next.attr('href'), false);
     } else {
+        playSound(sound.pling);
         $('#et-status-list').attr('style', 'background:#92F496').prepend('<li>Congratulations!!! We are done!</li>');
     }
 }
@@ -164,11 +215,15 @@ function openLink(url, newTab) {
     if (typeof(newTab) == 'undefined') {
         newTab = false;
     }
-    var a = document.createElement("a");
+    var a = document.createElement('a');
     a.href = url;
-    var evt = document.createEvent("MouseEvents");
-    evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, newTab, false, false, newTab, 0, null);
+    var evt = document.createEvent('MouseEvents');
+    evt.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, newTab, false, false, newTab, 0, null);
     a.dispatchEvent(evt);
+}
+
+function playSound(url) {
+    $('body').prepend('<audio autoplay><source src="' + url + '" controls></source></audio>');
 }
 
 jQuery.fn.simulateClick = function() {

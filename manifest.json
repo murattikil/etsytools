@@ -15,6 +15,7 @@
         "matches": ["*://*.etsy.com/*"],
         "run_at": "document_end"
     }],
+    "web_accessible_resources": ["audio/*"],
     "description": "It's tools for Etsy.com",
     "homepage_url": "http://etsytools.reatlat.net/",
     "icons": {
@@ -27,5 +28,5 @@
     "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqOHkxAbJszoUDW4dxXsbLaGa4fUFosbhifxFHLYq+PcHNL83+t7m37eKjM9n1/hq++9tlGu+nNW9dWd/v+zpqZgkdtWeLCa0c6HfwB94BxMkHuqCVtmG8wwZ7ve12x2e/TdQtfYhMhsEe0++dKAIkPrl0XSu50WvgrJTyK9fswzASK5repKY1vqorx4tAwl8OEWNfgseoPiXGqQ4QF160OdVdUEPootuAJgmUFY/9VPYsarcrySLp6fGIREnfkpsM87Lj4xWDkH+fJT1jCuG/FGcFdpR4u9PNuYw9wgC6oWofb5Fkk81UFH1BSyadD5YyRd9nYO7zxIq1vWYvwF6oQIDAQAB",
     "permissions": ["webRequest", "storage", "tabs", "*://*.etsy.com/"],
     "short_name": "EtsyTools",
-    "version": "1.4.2"
+    "version": "1.4.3"
 }
