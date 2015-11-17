@@ -1,5 +1,4 @@
-var css = document.createElement('LINK'),
-    userid, bar, buttons, counter, reply, ad;
+var css = document.createElement('LINK'), userid, bar, buttons, counter, reply, ad;
 css.rel = 'stylesheet';
 css.href = 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css';
 document.getElementsByTagName('HEAD')[0].appendChild(css);
@@ -46,7 +45,7 @@ $('#et-menu').append(buttons);
 $("div#right").children("div.panel.clear").children('a#reply-box-button').before(reply);
 $('#et-status-list').prepend('<li>' + ad[Math.floor(Math.random() * ad.length)] + '</li>')
 
-if ($('.pager').length) {
+if ($('#pager-wrapper .pager').length) {
     var page = $('#pager-wrapper .current-page').text() || $('#pager-wrapper .active a').text();
     var pages = $('#pager-wrapper .page_num:last').text() || $('#pager-wrapper li:last a').text();
     $('#et-status-list').prepend('<li>page ' + page + ' of ' + pages + '</li>')
