@@ -1,4 +1,5 @@
-var css = document.createElement('LINK'), userid, bar, buttons, counter, reply, ad;
+var css = document.createElement('LINK'),
+    userid, bar, buttons, counter, reply, ad, here, done, ooh;
 css.rel = 'stylesheet';
 css.href = 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css';
 document.getElementsByTagName('HEAD')[0].appendChild(css);
@@ -32,11 +33,32 @@ ad = [
     'Have a nice sales',
     'Simplicity is the ultimate sophistication. - Leonardo da Vinci',
     '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donate%40reatlat%2enet&lc=GB&item_name=Thanks%20for%20EtsyTools&item_number=EtsyTools&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHostedGuest" target="_blank">EtsyTools is not done for money, but feel free to show us how much you like it :)</a>',
-    'Please like <a href="https://www.facebook.com/TatianaZappaOfficialPage" target="_blank">page</a> my wife.',
-    'Please like <a href="https://www.etsy.com/shop/TatianaZappaArt">store</a> my wife.',
     'Tell sellers about <a href="http://etsytools.reatlat.net/" target="_blank">EtsyTools</a>',
     'Please share "<a href="http://etsytools.reatlat.net/" target="_blank">EtsyTools</a>" to friends',
     'Do you like "<a href="http://etsytools.reatlat.net/" target="_blank">EtsyTools</a>"? Please leave <a href="https://chrome.google.com/webstore/detail/etsytools/cmmikdmpeopfconfkmdnoffbplecnjae/reviews" target="_blank">review</a> =)'
+];
+
+here = [
+    'here',
+    'faved up to here',
+    'F2H',
+    'FTH',
+    'viewed to here',
+    'V2H',
+    'VTH'
+];
+
+done = [
+    'done',
+    'done up to here',
+    'finished',
+    'D2H',
+    'DTH'
+];
+
+ooh = [
+    'out of hearts on page ',
+    'OOH on page '
 ];
 
 $('body').prepend(bar);
@@ -52,13 +74,13 @@ if ($('#pager-wrapper .pager').length) {
 }
 
 $('#et-here-btn').click(function() {
-    txt('here | page ' + page);
+    txt(here[Math.floor(Math.random() * here.length)]);
 });
 $('#et-done-btn').click(function() {
-    txt('done | page ' + page);
+    txt(done[Math.floor(Math.random() * done.length)]);
 });
 $('#et-outhearts-btn').click(function() {
-    txt('out of hearts | page ' + page);
+    txt(ooh[Math.floor(Math.random() * ooh.length)] + page);
 });
 $('#fav-all').click(function() {
     favStart();
@@ -72,19 +94,24 @@ function init() {
     if (section == 'your' || section == 'developers') {
         $('#et-bar').attr('style', 'display:none');
         $('body').attr('style', 'margin-top: 0px');
-    };
+    } else {
+        $('body').attr('style', 'margin-top: 50px');
+    }
     userid = $('html').data('user-id');
     if (!userid) return;
     userid = userid.toString();
     ask();
     timer();
+    if (sessionStorage.favathone == 1) {
+        favStart();
+    }
 }
 
 function ask() {
     chrome.runtime.sendMessage({
         "userid": userid,
     }, function(data) {
-        update_counters(data);
+        update_counter(data);
     })
 }
 
@@ -92,7 +119,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     update_counters(request);
 });
 
-function update_counters(data) {
+function update_counter(data) {
     localStorage.hearted = parseInt(data.hearted);
     $('#et-hearted').text(parseInt(data.hearted));
     $('#et-unhearted').text(parseInt(data.unhearted));
@@ -153,7 +180,6 @@ function favA() {
                         $('#et-status-list').attr('style', 'background:#92F496').prepend('<li>Finished! Please, don\'t forget to check few pages, just in case if you were out of hearts.</li>');
                     }
                 }
-
             }, 100)
         }
     }, 100)
@@ -239,7 +265,3 @@ jQuery.fn.simulateClick = function() {
 };
 
 init();
-
-if (sessionStorage.favathone == 1) {
-    favStart();
-}
