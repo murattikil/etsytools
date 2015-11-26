@@ -1,5 +1,5 @@
 var css = document.createElement('LINK'),
-    userid, bar, buttons, counter, reply, ad, here, done, ooh;
+    userid, bar, buttons, counter, reply, ad, here, view, done, ooh;
 css.rel = 'stylesheet';
 css.href = 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css';
 document.getElementsByTagName('HEAD')[0].appendChild(css);
@@ -24,9 +24,11 @@ counter += '<i class="hearts fa fa-heart hearted"> </i><span id="et-hearted" tit
 counter += '<i class="hearts fa fa-heart-o"> </i><span id="et-unhearted" title="Unhearted this hour">0</span>';
 counter += '</span>';
 
-reply = '<button id="et-here-btn">here</button>';
-reply += '<button id="et-done-btn">done</button>';
-reply += '<br><button id="et-outhearts-btn">out of hearts</button>';
+reply = '<button id="et-here-btn" title="faved up to here">F2H</button>';
+reply += '<button id="et-view-btn" title="viewed up to here">V2H</button>';
+reply += '<br>';
+reply += '<button id="et-ooh-btn" title="out of hearts on this page">OOH</button>';
+reply += '<button id="et-done-btn" title="done up to here">DONE!</button>';
 
 ad = [
     'Have fun ;)',
@@ -42,7 +44,11 @@ here = [
     'here',
     'faved up to here',
     'F2H',
-    'FTH',
+    'FTH'
+];
+
+view = [
+    'here',
     'viewed to here',
     'V2H',
     'VTH'
@@ -76,10 +82,13 @@ if ($('#pager-wrapper .pager').length) {
 $('#et-here-btn').click(function() {
     txt(here[Math.floor(Math.random() * here.length)]);
 });
+$('#et-view-btn').click(function() {
+    txt(view[Math.floor(Math.random() * view.length)]);
+});
 $('#et-done-btn').click(function() {
     txt(done[Math.floor(Math.random() * done.length)]);
 });
-$('#et-outhearts-btn').click(function() {
+$('#et-ooh-btn').click(function() {
     txt(ooh[Math.floor(Math.random() * ooh.length)] + page);
 });
 $('#fav-all').click(function() {

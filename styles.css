@@ -18,27 +18,6 @@
     cursor: pointer
 }
 
-#click-all {
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    border: 1px solid #2196f3;
-    background-color: #2196f3
-}
-
-#click-all:hover {
-    background-color: #52ACF3
-}
-
-#fav-all {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    border: 1px solid #f44336;
-    background-color: #f44336
-}
-
-#fav-all:hover {
-    background-color: #F47066
-}
 
 #et-bar {
     -webkit-user-select: none;
@@ -115,8 +94,9 @@
 }
 
 #et-here-btn,
+#et-view-btn,
 #et-done-btn,
-#et-outhearts-btn {
+#et-ooh-btn {
     outline: none;
     box-sizing: border-box;
     color: #fff;
@@ -124,42 +104,59 @@
     margin-bottom: 8px;
     padding: 5px 0px;
     font-weight: bold;
-}
-
-#et-here-btn,
-#et-done-btn {
     width: 67px;
 }
 
-#et-outhearts-btn {
-    width: 134px;
+#et-ooh-btn {
     background-color: #999999;
     border: 1px solid #999999;
-    border-radius: 3px;
 }
 
-#et-outhearts-btn:hover {
+#et-ooh-btn:hover {
     background-color: #B3B3B3;
-}
-
-#et-here-btn {
-    background-color: #ff9800;
-    border: 1px solid #ff9800;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-}
-
-#et-here-btn:hover {
-    background-color: #FFAD33;
 }
 
 #et-done-btn {
     background-color: #13CD13;
     border: 1px solid #13CD13;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
 }
 
 #et-done-btn:hover {
     background-color: #5DE85D;
+}
+
+#fav-all,
+#et-here-btn,
+#et-ooh-btn {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+#click-all,
+#et-view-btn,
+#et-done-btn {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+#et-view-btn,
+#click-all {
+    border: 1px solid #2196f3;
+    background-color: #2196f3
+}
+
+#et-view-btn:hover,
+#click-all:hover {
+    background-color: #52ACF3
+}
+
+#et-here-btn,
+#fav-all {
+    border: 1px solid #f44336;
+    background-color: #f44336
+}
+
+#et-here-btn:hover,
+#fav-all:hover {
+    background-color: #F47066
 }
